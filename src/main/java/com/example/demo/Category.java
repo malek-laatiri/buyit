@@ -9,9 +9,9 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "Category_ID")
-    private int id;
+    private Long id;
     private String name;
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
@@ -26,4 +26,7 @@ public class Category {
         super();
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 }
