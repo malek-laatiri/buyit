@@ -21,8 +21,8 @@ public class CategoryController {
         this.CategoryRepository = CategoryRepository;
     }
 
-    @GetMapping("/addCategory")
-    public String showSignUpForm(Category Category) {
+    @GetMapping("/newCategory")
+    public String showSignUpForm(Category category) {
         return "add-category";
     }
 
@@ -34,21 +34,21 @@ public class CategoryController {
     }
     @GetMapping("/editCategory/{id}")
     public String showUpdateForm(@PathVariable("id") long id, Model model) {
-        Category user = CategoryRepository.findById(id)
+        Category category = CategoryRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
 
-        model.addAttribute("user", user);
-        return "update-Category";
+        model.addAttribute("category", category);
+        return "update-category";
     }
     @PostMapping("/updateCategory/{id}")
-    public String updateUser(@PathVariable("id") Long id, @Valid Category Category,
+    public String updateUser(@PathVariable("id") Long id, @Valid Category category,
                              BindingResult result, Model model) {
         if (result.hasErrors()) {
-            Category.setId(id);
-            return "update-Category";
+            category.setId(id);
+            return "update-category";
         }
 
-        CategoryRepository.save(Category);
+        CategoryRepository.save(category);
         model.addAttribute("users", CategoryRepository.findAll());
         return "indexCategory";
     }
