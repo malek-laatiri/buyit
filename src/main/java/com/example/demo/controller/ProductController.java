@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.Product;
+import com.example.demo.repository.CategoryRepository;
 import com.example.demo.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,15 +14,20 @@ import javax.validation.Valid;
 @Controller
 public class ProductController {
     private final ProductRepository ProductRepository;
+    private final CategoryRepository CategoryRepository;
+
 
     @Autowired
-    public ProductController(ProductRepository ProductRepository) {
+    public ProductController(ProductRepository ProductRepository,CategoryRepository CategoryRepository) {
         this.ProductRepository = ProductRepository;
+        this.CategoryRepository=CategoryRepository;
     }
 
 
     @GetMapping("/signup")
-    public String showSignUpForm(Product product) {
+    public String showSignUpForm(Product product,Model model) {
+        model.addAttribute("categories", CategoryRepository.findAll());
+
         return "add-user";
     }
 
