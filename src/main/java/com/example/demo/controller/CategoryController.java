@@ -9,16 +9,25 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import com.example.demo.repository.ProductRepository;
 
 import javax.validation.Valid;
 
 @Controller
 public class CategoryController {
     private final CategoryRepository CategoryRepository;
+    private final ProductRepository ProductRepository;
 
     @Autowired
-    public CategoryController(CategoryRepository CategoryRepository) {
-        this.CategoryRepository = CategoryRepository;
+    public CategoryController(ProductRepository ProductRepository,CategoryRepository CategoryRepository) {
+        this.ProductRepository = ProductRepository;
+        this.CategoryRepository=CategoryRepository;
+    }
+    @GetMapping("/")
+    public String showHomePage(Model model) {
+        model.addAttribute("categories", CategoryRepository.findAll());
+        model.addAttribute("users", ProductRepository.findAll());
+        return "home";
     }
 
     @GetMapping("/newCategory")

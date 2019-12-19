@@ -8,7 +8,7 @@ public class Ordered_product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "Ordered_product_ID")
-    private int id;
+    private Long id;
     private int quantity;
 
 
@@ -50,7 +50,7 @@ public class Ordered_product {
 
 
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 

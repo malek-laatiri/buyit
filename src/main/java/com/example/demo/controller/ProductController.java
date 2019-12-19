@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.Category;
 import com.example.demo.Product;
 import com.example.demo.repository.CategoryRepository;
 import com.example.demo.repository.ProductRepository;
@@ -10,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 
 @Controller
 public class ProductController {
@@ -29,6 +31,13 @@ public class ProductController {
         model.addAttribute("categories", CategoryRepository.findAll());
 
         return "add-user";
+    }
+    @GetMapping("/productsByCategory/{id}")
+    public String productsByCategory(@PathVariable("id") Category id,Model model) {
+        model.addAttribute("users", ProductRepository.findByCategory(id));
+
+
+        return "productbycategory";
     }
 
     @PostMapping("/adduser")
