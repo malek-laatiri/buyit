@@ -54,4 +54,7 @@ public class Ordered_product {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

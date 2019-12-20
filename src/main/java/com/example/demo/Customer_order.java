@@ -10,7 +10,7 @@ public class Customer_order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "customer_order_ID")
-    private int id;
+    private Long id;
     private int amount;
     private int confirmation_number;
     private Date date_created;
@@ -37,7 +37,7 @@ public class Customer_order {
         this.customer = customer;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
