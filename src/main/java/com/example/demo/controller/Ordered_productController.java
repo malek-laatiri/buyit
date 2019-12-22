@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.util.Date;
+import java.util.Random;
 
 @Controller
 public class Ordered_productController {
@@ -46,9 +48,12 @@ public class Ordered_productController {
 
     @PostMapping("/saveOrder")
     public String addUser(@Valid Ordered_product Ordered_product, BindingResult result, Model model) {
-        Customer_order Customer_order= new Customer_order();
-        Customer_orderRepository.save(Customer_order);
-        Ordered_product.setCustomer_order(Customer_order);
+       // Customer_order Customer_order= new Customer_order();
+        //Customer_order.setDate_created(new Date());
+        //Customer_order.setConfirmation_number(new Random().nextInt(100000));
+        //Customer_order.setAmount(Ordered_product.getQuantity()*Ordered_product.getProduct().getPrice());
+        //Customer_orderRepository.save(Customer_order);
+        //Ordered_product.setCustomer_order(Customer_order);
         Ordered_productRepository.save(Ordered_product);
         model.addAttribute("users", Ordered_productRepository.findAll());
         return "indexOrdered_product";
@@ -73,6 +78,10 @@ public class Ordered_productController {
         model.addAttribute("users", Ordered_productRepository.findAll());
         return "indexOredered_index";
     }
-
+    @GetMapping("/allOrderedProduct")
+    public String addUser(Model model) {
+        model.addAttribute("Ordered_product", Ordered_productRepository.findAll());
+        return "cart";
+    }
 
 }
