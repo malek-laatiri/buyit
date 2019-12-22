@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 @Controller
@@ -80,7 +82,17 @@ public class Ordered_productController {
     }
     @GetMapping("/allOrderedProduct")
     public String addUser(Model model) {
-        model.addAttribute("Ordered_product", Ordered_productRepository.findAll());
+        int somme=0;
+        List<Ordered_product> counts = new ArrayList<>();
+        Ordered_productRepository.findAll().forEach(counts::add);
+        for (int i=0;i<counts.size();i++){
+            Ordered_product current = counts.get(i);
+            System.out.println(current.getId());
+            somme=somme+current.getQuantity() * current.getProduct().getPrice();
+        }
+        model.addAttribute("somme", somme);
+
+        model.addAttribute("users", Ordered_productRepository.findAll());
         return "cart";
     }
 
