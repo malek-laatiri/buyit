@@ -98,20 +98,17 @@
                     <table class="table">
                         <thead class="thead-primary">
                         <tr class="text-center">
-                            <th>&nbsp;</th>
                             <th>Product name</th>
                             <th>Product description</th>
                             <th>Price</th>
                             <th>Quantity</th>
                             <th>Total</th>
-                            <th>&nbsp;</th>
 
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:with="totalPrice=0" class="text-center" th:each="user : ${users}">
-                            <td class="product-remove"><a th:href="@{/delete/{id}(id=${user.id})}"><span
-                                    class="ion-ios-close"></span></a>
+
                             <td th:text="${user.product.name}"></td>
                             </h3>
                             <p>
@@ -131,8 +128,7 @@
                             <td  th:text="${user.product.price * user.quantity}"></td>
                             </td>
 
-                            <td><a th:href="@{/edit/{id}(id=${user.id})}" class="btn btn-primary"><i
-                                    class="fas fa-user-edit ml-2"></i></a></td>
+
                         </tr>
 
 
@@ -142,27 +138,48 @@
             </div>
         </div>
 
-            <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
-                <div class="cart-total mb-3">
-                    <h3>Cart Totals</h3>
-                    <p class="d-flex">
-                        <span>Subtotal</span>
-                        <span>$<td th:text="${somme}"></td></span>
-                    </p>
-                    <p class="d-flex">
-                        <span>Delivery</span>
-                        <span>$0.00</span>
-                    </p>
+        <div class="col-lg-8 mt-5 cart-wrap ftco-animate">
+            <div class="cart-total mb-3">
+                <h3>Cart Totals</h3>
+                <p class="d-flex">
+                    <span>Subtotal</span>
+                    <span>$<td th:text="${somme}"></td></span>
+                </p>
+                <p class="d-flex">
+                    <span>Delivery</span>
+                    <span>$0.00</span>
+                </p>
 
-                    <hr>
-                    <p class="d-flex total-price">
-                        <span>Total</span>
-                        <span>$<td th:text="${somme}"></td></span>
-                    </p>
-                </div>
-                <p><a th:href="@{/newCustomer}" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
+                <hr>
+                <p class="d-flex total-price">
+                    <span>Total</span>
+                    <span>$<td th:text="${somme}"></td></span>
+                </p>
+            </div>
+            <div class="cart-total mb-3">
+                <h3>Customer</h3>
+                <p class="d-flex">
+                    <span>name</span>
+                    <span><td th:text="${Customer.name}"></td></span></p>
+                <p class="d-flex">
+                    <span>address</span>
+                    <span><td th:text="${Customer.address}"></td></span></p>
+                <p class="d-flex">
+                    <span>country</span>
+                    <span><td th:text="${Customer.city_region}"></td></span></p>
+                <p class="d-flex">
+                    <span>credit card</span>
+                    <span><td th:text="${Customer.cc_number}"></td></span></p>
+                <p class="d-flex">
+                    <span>Email</span>
+                    <span><td th:text="${Customer.email}"></td></span></p>
+                <p class="d-flex">
+                    <span>Phone</span>
+                    <span><td th:text="${Customer.phone}"></td></span></p>
             </div>
         </div>
+
+    </div>
     </div>
 </section>
 
@@ -245,6 +262,7 @@
         </div>
     </div>
 </footer>
+
 
 <!-- loader -->
 <div id="ftco-loader" class="show fullscreen">

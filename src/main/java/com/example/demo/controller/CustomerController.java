@@ -49,8 +49,20 @@ public class CustomerController {
     @PostMapping("/addcustomer")
     public String addUser(@Valid Customer Customer, BindingResult result, Model model) {
         CustomerRepository.save(Customer);
-        model.addAttribute("users", CustomerRepository.findAll());
-        return "redirect:/";
+        model.addAttribute("users", Ordered_productRepository.findAll());
+        int somme=0;
+        List<Ordered_product> counts = new ArrayList<>();
+        Ordered_productRepository.findAll().forEach(counts::add);
+        for (int i=0;i<counts.size();i++){
+            Ordered_product current = counts.get(i);
+            System.out.println(current.getId());
+            somme=somme+current.getQuantity() * current.getProduct().getPrice();
+        }
+
+        model.addAttribute("Customer", Customer);
+        model.addAttribute("somme", somme);
+
+        return "comfirmation";
     }
 
 }
